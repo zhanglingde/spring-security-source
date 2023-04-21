@@ -1,0 +1,61 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.4'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.ling'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+
+repositories {
+    mavenLocal()
+    maven { url "https://maven.aliyun.com/nexus/content/groups/public/"}
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://repo.spring.io/snapshot' }
+}
+
+apply plugin: 'io.spring.convention.spring-module'
+
+dependencies {
+    management platform(project(":spring-security-dependencies"))
+    // 添加 Spring Security 模块
+    api project(':spring-security-acl')
+    api project(':spring-security-aspects')
+//    api project(':spring-security-bom')
+    api project(':spring-security-cas')
+    api project(':spring-security-config')
+    api project(':spring-security-core')
+    api project(':spring-security-crypto')
+    api project(':spring-security-data')
+//    api project(':spring-security-dependencies')
+    api project(':spring-security-ldap')
+    api project(':spring-security-messaging')
+    api project(':spring-security-oauth2-client')
+    api project(':spring-security-oauth2-core')
+    api project(':spring-security-oauth2-jose')
+    api project(':spring-security-oauth2-resource-server')
+    api project(':spring-security-openid')
+    api project(':spring-security-remoting')
+    api project(':spring-security-rsocket')
+    api project(':spring-security-saml2-service-provider')
+    api project(':spring-security-taglibs')
+    api project(':spring-security-web')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// gradle 高版本必须要有空任务
+task prepareKotlinBuildScriptModel {
+
+}
+//tasks.register("prepareKotlinBuildScriptModel"){}
